@@ -1,0 +1,36 @@
+{
+  "name": "fastify-env",
+  "version": "1.0.0",
+  "description": "Fastify plugin to check environment variables",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard | snazzy",
+    "unit": "tap test",
+    "test": "npm run lint && npm run unit",
+    "coverage": "tap --cov --coverage-report=html test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fastify/fastify-env.git"
+  },
+  "keywords": [
+    "fastify"
+  ],
+  "author": "Tommaso Allevi - @allevo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fastify/fastify-env/issues"
+  },
+  "homepage": "https://github.com/fastify/fastify-env#readme",
+  "dependencies": {
+    "ajv": "^5.2.2",
+    "fastify-plugin": "^0.1.1"
+  },
+  "devDependencies": {
+    "fastify": "^0.27.0",
+    "pre-commit": "^1.2.2",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.3",
+    "tap": "^10.7.2"
+  }
+}
