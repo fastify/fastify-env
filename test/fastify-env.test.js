@@ -76,8 +76,7 @@ const tests = [
         PORT: {
           type: 'integer'
         }
-      },
-      additionalProperties: false
+      }
     },
     data: {
       PORT: '44',

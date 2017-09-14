@@ -6,6 +6,7 @@ const Ajv = require('ajv')
 function loadAndValidateEnvironment (fastify, opts, done) {
   const ajv = new Ajv({ removeAdditional: true, useDefaults: true, coerceTypes: true })
   const schema = opts.schema
+  schema.additionalProperties = false
   const confKey = opts.confKey || 'config'
 
   const data = Object.assign({}, opts.data || process.env)
