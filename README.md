@@ -1,7 +1,7 @@
 # fastify-env
+[![Greenkeeper badge](https://badges.greenkeeper.io/fastify/fastify-env.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/fastify/fastify-env.svg?branch=master)](https://travis-ci.org/fastify/fastify-env)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
 
 Fastify plugin to check environment variables
 
