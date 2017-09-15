@@ -28,7 +28,7 @@ const tests = [
   {
     name: 'empty ok',
     schema: { type: 'object' },
-    data: { },
+    data: [ { } ],
     isOk: true,
     confExpected: {}
   },
@@ -42,9 +42,9 @@ const tests = [
         }
       }
     },
-    data: {
+    data: [{
       PORT: '44'
-    },
+    }],
     isOk: true,
     confExpected: {
       PORT: '44'
@@ -60,9 +60,9 @@ const tests = [
         }
       }
     },
-    data: {
+    data: [{
       PORT: '44'
-    },
+    }],
     isOk: true,
     confExpected: {
       PORT: 44
@@ -78,10 +78,10 @@ const tests = [
         }
       }
     },
-    data: {
+    data: [{
       PORT: '44',
       ANOTHER_PORT: '55'
-    },
+    }],
     isOk: true,
     confExpected: {
       PORT: 44
@@ -98,7 +98,7 @@ const tests = [
         }
       }
     },
-    data: { },
+    data: [{ }],
     isOk: true,
     confExpected: {
       PORT: 5555
@@ -116,10 +116,36 @@ const tests = [
         }
       }
     },
-    data: { },
+    data: [{ }],
     isOk: true,
     confExpected: {
       PORT: 6666
+    }
+  },
+  {
+    name: 'simple object - ok - merge multiple object + env',
+    schema: {
+      type: 'object',
+      required: [ 'PORT', 'MONGODB_URL' ],
+      properties: {
+        PORT: {
+          type: 'integer',
+          default: 6666
+        },
+        MONGODB_URL: {
+          type: 'string'
+        },
+        VALUE_FROM_ENV: {
+          type: 'string'
+        }
+      }
+    },
+    data: [ { PORT: 3333 }, { MONGODB_URL: 'mongodb://localhost/pippo' } ],
+    isOk: true,
+    confExpected: {
+      PORT: 3333,
+      MONGODB_URL: 'mongodb://localhost/pippo',
+      VALUE_FROM_ENV: 'pippo'
     }
   },
   {
@@ -133,7 +159,7 @@ const tests = [
         }
       }
     },
-    data: { },
+    data: [{ }],
     isOk: false,
     errorMessage: 'should have required property \'PORT\''
   }
