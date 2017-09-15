@@ -12,7 +12,12 @@ const optsSchema = {
   properties: {
     schema: { type: 'object', additionalProperties: true },
     confKey: { type: 'string', default: 'config' },
-    data: { type: 'array', items: { type: 'object' }, minItems: 1 },
+    data: {
+      oneOf: [
+        { type: 'array', items: { type: 'object' }, minItems: 1 },
+        { type: 'object' }
+      ]
+    },
     env: { type: 'boolean', default: true }
   }
 }
@@ -21,14 +26,16 @@ const optsSchemaValidator = ajv.compile(optsSchema)
 function loadAndValidateEnvironment (fastify, opts, done) {
   const isOptionValid = optsSchemaValidator(opts)
   if (!isOptionValid) {
-    throw new Error(optsSchemaValidator.errors.map(e => e.message))
+    return done(new Error(optsSchemaValidator.errors.map(e => e.message)))
   }
 
   const schema = opts.schema
   schema.additionalProperties = false
   const confKey = opts.confKey
 
-  const data = xtend.apply(null, opts.env ? opts.data.concat(process.env) : opts.data)
+  const data = Array.isArray(opts.data)
+    ? xtend.apply(null, opts.env ? opts.data.concat(process.env) : opts.data)
+    : xtend(opts.data)
 
   const valid = ajv.validate(schema, data)
   if (!valid) {

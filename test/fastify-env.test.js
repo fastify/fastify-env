@@ -28,7 +28,7 @@ const tests = [
   {
     name: 'empty ok',
     schema: { type: 'object' },
-    data: [ { } ],
+    data: { },
     isOk: true,
     confExpected: {}
   },
@@ -42,9 +42,9 @@ const tests = [
         }
       }
     },
-    data: [{
+    data: {
       PORT: '44'
-    }],
+    },
     isOk: true,
     confExpected: {
       PORT: '44'
@@ -60,9 +60,9 @@ const tests = [
         }
       }
     },
-    data: [{
+    data: {
       PORT: '44'
-    }],
+    },
     isOk: true,
     confExpected: {
       PORT: 44
@@ -78,10 +78,10 @@ const tests = [
         }
       }
     },
-    data: [{
+    data: {
       PORT: '44',
       ANOTHER_PORT: '55'
-    }],
+    },
     isOk: true,
     confExpected: {
       PORT: 44
@@ -98,7 +98,7 @@ const tests = [
         }
       }
     },
-    data: [{ }],
+    data: { },
     isOk: true,
     confExpected: {
       PORT: 5555
@@ -106,6 +106,24 @@ const tests = [
   },
   {
     name: 'simple object - ok - required + default',
+    schema: {
+      type: 'object',
+      required: [ 'PORT' ],
+      properties: {
+        PORT: {
+          type: 'integer',
+          default: 6666
+        }
+      }
+    },
+    data: { },
+    isOk: true,
+    confExpected: {
+      PORT: 6666
+    }
+  },
+  {
+    name: 'simple object - ok - allow array',
     schema: {
       type: 'object',
       required: [ 'PORT' ],
@@ -159,9 +177,24 @@ const tests = [
         }
       }
     },
-    data: [{ }],
+    data: { },
     isOk: false,
     errorMessage: 'should have required property \'PORT\''
+  },
+  {
+    name: 'simple object - invalid data',
+    schema: {
+      type: 'object',
+      required: [ 'PORT' ],
+      properties: {
+        PORT: {
+          type: 'integer'
+        }
+      }
+    },
+    data: [],
+    isOk: false,
+    errorMessage: 'should NOT have less than 1 items,should be object,should match exactly one schema in oneOf'
   }
 ]
 
