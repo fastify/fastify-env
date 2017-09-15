@@ -16,7 +16,6 @@ function makeTest (t, schema, data, isOk, confExpected, errorMessage) {
     if (isOk) {
       t.notOk(err)
       t.strictSame(fastify.config, confExpected)
-      t.end()
       return
     }
 
@@ -123,6 +122,67 @@ const tests = [
     }
   },
   {
+    name: 'simple object - ok - allow array',
+    schema: {
+      type: 'object',
+      required: [ 'PORT' ],
+      properties: {
+        PORT: {
+          type: 'integer',
+          default: 6666
+        }
+      }
+    },
+    data: [{ }],
+    isOk: true,
+    confExpected: {
+      PORT: 6666
+    }
+  },
+  {
+    name: 'simple object - ok - merge multiple object + env',
+    schema: {
+      type: 'object',
+      required: [ 'PORT', 'MONGODB_URL' ],
+      properties: {
+        PORT: {
+          type: 'integer',
+          default: 6666
+        },
+        MONGODB_URL: {
+          type: 'string'
+        },
+        VALUE_FROM_ENV: {
+          type: 'string'
+        }
+      }
+    },
+    data: [ { PORT: 3333 }, { MONGODB_URL: 'mongodb://localhost/pippo' } ],
+    isOk: true,
+    confExpected: {
+      PORT: 3333,
+      MONGODB_URL: 'mongodb://localhost/pippo',
+      VALUE_FROM_ENV: 'pippo'
+    }
+  },
+  {
+    name: 'simple object - ok - load only from env',
+    schema: {
+      type: 'object',
+      required: [ 'VALUE_FROM_ENV' ],
+      properties: {
+        VALUE_FROM_ENV: {
+          type: 'string'
+        }
+      }
+    },
+    data: undefined,
+    isOk: true,
+    confExpected: {
+      VALUE_FROM_ENV: 'pippo'
+    }
+  },
+  {
     name: 'simple object - KO',
     schema: {
       type: 'object',
@@ -136,6 +196,21 @@ const tests = [
     data: { },
     isOk: false,
     errorMessage: 'should have required property \'PORT\''
+  },
+  {
+    name: 'simple object - invalid data',
+    schema: {
+      type: 'object',
+      required: [ 'PORT' ],
+      properties: {
+        PORT: {
+          type: 'integer'
+        }
+      }
+    },
+    data: [],
+    isOk: false,
+    errorMessage: 'should NOT have less than 1 items,should be object,should match exactly one schema in oneOf'
   }
 ]
 

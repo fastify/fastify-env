@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "standard | snazzy",
-    "unit": "tap test",
+    "unit": "VALUE_FROM_ENV=pippo tap test",
     "test": "npm run lint && npm run unit",
     "coverage": "tap --cov --coverage-report=html test"
   },
@@ -24,7 +24,8 @@
   "homepage": "https://github.com/fastify/fastify-env#readme",
   "dependencies": {
     "ajv": "^5.2.2",
-    "fastify-plugin": "^0.1.1"
+    "fastify-plugin": "^0.1.1",
+    "xtend": "^4.0.1"
   },
   "devDependencies": {
     "fastify": "^0.27.0",
