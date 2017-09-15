@@ -16,7 +16,6 @@ function makeTest (t, schema, data, isOk, confExpected, errorMessage) {
     if (isOk) {
       t.notOk(err)
       t.strictSame(fastify.config, confExpected)
-      t.end()
       return
     }
 
@@ -163,6 +162,23 @@ const tests = [
     confExpected: {
       PORT: 3333,
       MONGODB_URL: 'mongodb://localhost/pippo',
+      VALUE_FROM_ENV: 'pippo'
+    }
+  },
+  {
+    name: 'simple object - ok - load only from env',
+    schema: {
+      type: 'object',
+      required: [ 'VALUE_FROM_ENV' ],
+      properties: {
+        VALUE_FROM_ENV: {
+          type: 'string'
+        }
+      }
+    },
+    data: undefined,
+    isOk: true,
+    confExpected: {
       VALUE_FROM_ENV: 'pippo'
     }
   },

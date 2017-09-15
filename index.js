@@ -16,7 +16,8 @@ const optsSchema = {
       oneOf: [
         { type: 'array', items: { type: 'object' }, minItems: 1 },
         { type: 'object' }
-      ]
+      ],
+      default: {}
     },
     env: { type: 'boolean', default: true }
   }
@@ -33,9 +34,15 @@ function loadAndValidateEnvironment (fastify, opts, done) {
   schema.additionalProperties = false
   const confKey = opts.confKey
 
-  const data = Array.isArray(opts.data)
-    ? xtend.apply(null, opts.env ? opts.data.concat(process.env) : opts.data)
-    : xtend(opts.data)
+  let data = opts.data
+  if (!Array.isArray(opts.data)) {
+    data = [data]
+  }
+  if (opts.env) {
+    data.push(process.env)
+  }
+
+  data = xtend.apply(null, data)
 
   const valid = ajv.validate(schema, data)
   if (!valid) {
