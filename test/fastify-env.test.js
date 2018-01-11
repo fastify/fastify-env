@@ -12,15 +12,16 @@ function makeTest (t, schema, data, isOk, confExpected, errorMessage) {
     confKey: 'config',
     schema: schema,
     data: data
-  }, function (err) {
-    if (isOk) {
-      t.notOk(err)
-      t.strictSame(fastify.config, confExpected)
-      return
-    }
-
-    t.strictSame(err.message, errorMessage)
   })
+    .ready(err => {
+      if (isOk) {
+        t.notOk(err)
+        t.strictSame(fastify.config, confExpected)
+        return
+      }
+
+      t.strictSame(err.message, errorMessage)
+    })
 }
 
 const tests = [
