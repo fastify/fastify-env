@@ -7,7 +7,7 @@
     "lint": "standard | snazzy",
     "unit": "VALUE_FROM_ENV=pippo tap test",
     "test": "npm run lint && npm run unit",
-    "coverage": "tap --cov --coverage-report=html test"
+    "coverage": "VALUE_FROM_ENV=pippo tap --cov --coverage-report=html test"
   },
   "repository": {
     "type": "git",
