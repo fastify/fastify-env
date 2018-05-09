@@ -4,15 +4,12 @@ const t = require('tap')
 const Fastify = require('fastify')
 const fastifyEnv = require('../index')
 
-function makeTest (t, schema, data, isOk, confExpected, errorMessage) {
+function makeTest (t, options, isOk, confExpected, errorMessage) {
   t.plan(isOk ? 2 : 1)
+  options = Object.assign({ confKey: 'config' }, options)
 
   const fastify = Fastify()
-  fastify.register(fastifyEnv, {
-    confKey: 'config',
-    schema: schema,
-    data: data
-  })
+  fastify.register(fastifyEnv, options)
     .ready(err => {
       if (isOk) {
         t.notOk(err)
@@ -184,6 +181,24 @@ const tests = [
     }
   },
   {
+    name: 'simple object - ok - load only from .env',
+    schema: {
+      type: 'object',
+      required: [ 'VALUE_FROM_DOTENV' ],
+      properties: {
+        VALUE_FROM_DOTENV: {
+          type: 'string'
+        }
+      }
+    },
+    data: undefined,
+    isOk: true,
+    dotenv: { path: `${__dirname}/.env` },
+    confExpected: {
+      VALUE_FROM_DOTENV: 'look ma'
+    }
+  },
+  {
     name: 'simple object - KO',
     schema: {
       type: 'object',
@@ -217,6 +232,13 @@ const tests = [
 
 tests.forEach(function (testConf) {
   t.test(testConf.name, t => {
-    makeTest(t, testConf.schema, testConf.data, testConf.isOk, testConf.confExpected, testConf.errorMessage)
+    const options = {
+      schema: testConf.schema,
+      data: testConf.data,
+      dotenv: testConf.dotenv,
+      dotenvConfig: testConf.dotenvConfig
+    }
+
+    makeTest(t, options, testConf.isOk, testConf.confExpected, testConf.errorMessage)
   })
 })

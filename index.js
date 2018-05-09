@@ -19,7 +19,8 @@ const optsSchema = {
       ],
       default: {}
     },
-    env: { type: 'boolean', default: true }
+    env: { type: 'boolean', default: true },
+    dotenv: { type: ['boolean', 'object'], default: false }
   }
 }
 const optsSchemaValidator = ajv.compile(optsSchema)
@@ -38,6 +39,11 @@ function loadAndValidateEnvironment (fastify, opts, done) {
   if (!Array.isArray(opts.data)) {
     data = [data]
   }
+
+  if (opts.dotenv) {
+    require('dotenv').config(Object.assign({}, opts.dotenv))
+  }
+
   if (opts.env) {
     data.push(process.env)
   }
