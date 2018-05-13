@@ -23,16 +23,16 @@
   },
   "homepage": "https://github.com/fastify/fastify-env#readme",
   "dependencies": {
-    "ajv": "^6.0.0",
+    "ajv": "^6.5.0",
     "dotenv": "5.0.1",
-    "fastify-plugin": "^1.0.0",
+    "fastify-plugin": "^1.0.1",
     "xtend": "^4.0.1"
   },
   "devDependencies": {
-    "fastify": "^1.0.0-rc.1",
+    "fastify": "^1.4.0",
     "pre-commit": "^1.2.2",
     "snazzy": "^7.0.0",
-    "standard": "^11.0.0",
+    "standard": "^11.0.1",
     "tap": "^11.0.0"
   }
 }
