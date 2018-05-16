@@ -45,7 +45,7 @@ function loadAndValidateEnvironment (fastify, opts, done) {
   }
 
   if (opts.env) {
-    data.push(process.env)
+    data.unshift(process.env)
   }
 
   data = xtend.apply(null, data)

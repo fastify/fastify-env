@@ -181,6 +181,23 @@ const tests = [
     }
   },
   {
+    name: 'simple object - ok - opts override environment',
+    schema: {
+      type: 'object',
+      required: [ 'VALUE_FROM_ENV' ],
+      properties: {
+        VALUE_FROM_ENV: {
+          type: 'string'
+        }
+      }
+    },
+    data: { VALUE_FROM_ENV: 'pluto' },
+    isOk: true,
+    confExpected: {
+      VALUE_FROM_ENV: 'pluto'
+    }
+  },
+  {
     name: 'simple object - ok - load only from .env',
     schema: {
       type: 'object',
