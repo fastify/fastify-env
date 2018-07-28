@@ -29,15 +29,19 @@ const schema = {
 }
 
 const options = {
-  confKey: 'config', // optional
+  confKey: 'config', // optional, default: 'config'
   schema: schema,
   data: data // optional, default: process.env
 }
-fastify.register(fastifyEnv, options, function (err) {
-   // or fastify[options.confKey]
-  console.log(fastify.config)
-  // output: { PORT: 3000 }
-})
+
+fastify
+  .register(fastifyEnv, options)
+  .ready((err) => {
+    if (err) console.error(err)
+
+    console.log(fastify.config) // or fastify[options.confKey]
+    // output: { PORT: 3000 }
+  })
 ```
 
 **NB:** internally this plugin force to not have additional properties, so the `additionalProperties` flag is forced to be `false`
