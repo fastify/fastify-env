@@ -49,4 +49,4 @@ fastify
 
 ## Acknowledgements
 
-Kindly sponsirized by [Mia Platform](https://www.mia-platform.eu/)
+Kindly sponsored by [Mia Platform](https://www.mia-platform.eu/)
