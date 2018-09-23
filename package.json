@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/fastify/fastify-env#readme",
   "dependencies": {
-    "ajv": "^6.5.0",
+    "ajv": "^6.5.4",
     "dotenv": "6.0.0",
     "fastify-plugin": "^1.0.1",
     "xtend": "^4.0.1"
