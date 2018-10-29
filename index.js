@@ -1,8 +1,6 @@
 'use strict'
 
 const fp = require('fastify-plugin')
-const xtend = require('xtend')
-
 const Ajv = require('ajv')
 const ajv = new Ajv({ removeAdditional: true, useDefaults: true, coerceTypes: true })
 
@@ -48,16 +46,17 @@ function loadAndValidateEnvironment (fastify, opts, done) {
     data.unshift(process.env)
   }
 
-  data = xtend.apply(null, data)
+  const merge = {}
+  data.forEach(d => Object.assign(merge, d))
 
-  const valid = ajv.validate(schema, data)
+  const valid = ajv.validate(schema, merge)
   if (!valid) {
     const error = new Error(ajv.errors.map(e => e.message).join('\n'))
     error.errors = ajv.errors
     return done(error)
   }
 
-  fastify.decorate(confKey, data)
+  fastify.decorate(confKey, merge)
 
   done()
 }
