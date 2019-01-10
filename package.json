@@ -24,7 +24,7 @@
   "homepage": "https://github.com/fastify/fastify-env#readme",
   "dependencies": {
     "ajv": "^6.5.4",
-    "dotenv": "6.2.0",
+    "dotenv": "^6.2.0",
     "fastify-plugin": "^1.0.1"
   },
   "devDependencies": {
