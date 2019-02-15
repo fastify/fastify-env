@@ -1,64 +1,17 @@
 'use strict'
 
 const fp = require('fastify-plugin')
-const Ajv = require('ajv')
-const ajv = new Ajv({ removeAdditional: true, useDefaults: true, coerceTypes: true })
-
-const optsSchema = {
-  type: 'object',
-  required: [ 'schema' ],
-  properties: {
-    schema: { type: 'object', additionalProperties: true },
-    confKey: { type: 'string', default: 'config' },
-    data: {
-      oneOf: [
-        { type: 'array', items: { type: 'object' }, minItems: 1 },
-        { type: 'object' }
-      ],
-      default: {}
-    },
-    env: { type: 'boolean', default: true },
-    dotenv: { type: ['boolean', 'object'], default: false }
-  }
-}
-const optsSchemaValidator = ajv.compile(optsSchema)
+const envSchema = require('env-schema')
 
 function loadAndValidateEnvironment (fastify, opts, done) {
-  const isOptionValid = optsSchemaValidator(opts)
-  if (!isOptionValid) {
-    return done(new Error(optsSchemaValidator.errors.map(e => e.message)))
+  try {
+    const config = envSchema(opts)
+    const confKey = opts.confKey
+    fastify.decorate(confKey, config)
+    done()
+  } catch (err) {
+    done(err)
   }
-
-  const schema = opts.schema
-  schema.additionalProperties = false
-  const confKey = opts.confKey
-
-  let data = opts.data
-  if (!Array.isArray(opts.data)) {
-    data = [data]
-  }
-
-  if (opts.dotenv) {
-    require('dotenv').config(Object.assign({}, opts.dotenv))
-  }
-
-  if (opts.env) {
-    data.unshift(process.env)
-  }
-
-  const merge = {}
-  data.forEach(d => Object.assign(merge, d))
-
-  const valid = ajv.validate(schema, merge)
-  if (!valid) {
-    const error = new Error(ajv.errors.map(e => e.message).join('\n'))
-    error.errors = ajv.errors
-    return done(error)
-  }
-
-  fastify.decorate(confKey, merge)
-
-  done()
 }
 
 module.exports = fp(loadAndValidateEnvironment, {
