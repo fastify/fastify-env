@@ -31,10 +31,7 @@ const schema = {
 const options = {
   confKey: 'config', // optional, default: 'config'
   schema: schema,
-  data: data, // optional, default: process.env
-  // optional, boolean || object, default: false
-  // accept options from dotenv module
-  dotenv: { path: `${__dirname}/.env` } // or dotenv: true
+  data: data // optional, default: process.env
 }
 
 fastify
@@ -45,6 +42,23 @@ fastify
     console.log(fastify.config) // or fastify[options.confKey]
     // output: { PORT: 3000 }
   })
+```
+
+This module is wrapper around [env-schema](https://www.npmjs.com/package/env-schema), to read `.env` file you must pass `dotenv` in options :
+
+```js
+const options = {
+  dotenv: true // will read .env in root folder
+}
+
+// or, pass config options avalible on dotenv module
+const options = {
+  dotenv: {
+    path: `${__dirname}/.env`
+    debug: true
+  }
+}
+
 ```
 
 **NB:** internally this plugin force to not have additional properties, so the `additionalProperties` flag is forced to be `false`
