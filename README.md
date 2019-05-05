@@ -34,7 +34,7 @@ const options = {
   data: data, // optional, default: process.env
   // optional, boolean || object, default: false
   // accept options from dotenv module
-  dotenv: { path: `${__dirname}/.env` }
+  dotenv: { path: `${__dirname}/.env` } // or dotenv: true
 }
 
 fastify
