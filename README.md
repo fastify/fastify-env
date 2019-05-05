@@ -32,7 +32,9 @@ const options = {
   confKey: 'config', // optional, default: 'config'
   schema: schema,
   data: data, // optional, default: process.env
-  dotenv: true // optional, default: false
+  // optional, boolean || object, default: false
+  // accept options from dotenv module
+  dotenv: { path: `${__dirname}/.env` }
 }
 
 fastify
