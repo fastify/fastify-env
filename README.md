@@ -31,7 +31,8 @@ const schema = {
 const options = {
   confKey: 'config', // optional, default: 'config'
   schema: schema,
-  data: data // optional, default: process.env
+  data: data, // optional, default: process.env
+  dotenv: true // optional, default: false
 }
 
 fastify
