@@ -44,6 +44,23 @@ fastify
   })
 ```
 
+This module is a wrapper around [env-schema](https://www.npmjs.com/package/env-schema) so, to read `.env` file you must set the `dotenv` in options:
+
+```js
+const options = {
+  dotenv: true // will read .env in root folder
+}
+
+// or, pass config options avalible on dotenv module
+const options = {
+  dotenv: {
+    path: `${__dirname}/.env`
+    debug: true
+  }
+}
+
+```
+
 **NB:** internally this plugin force to not have additional properties, so the `additionalProperties` flag is forced to be `false`
 
 
