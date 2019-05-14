@@ -44,7 +44,7 @@ fastify
   })
 ```
 
-This module is wrapper around [env-schema](https://www.npmjs.com/package/env-schema), to read `.env` file you must pass `dotenv` in options :
+This module is a wrapper around [env-schema](https://www.npmjs.com/package/env-schema) so, to read `.env` file you must set the `dotenv` in options:
 
 ```js
 const options = {
