@@ -259,7 +259,8 @@ tests.forEach(function (testConf) {
   })
 })
 
-t.test('should use custom config key name', async t => {
+t.test('should use custom config key name', t => {
+  t.plan(1)
   const schema = {
     type: 'object',
     required: [ 'PORT' ],
@@ -272,7 +273,7 @@ t.test('should use custom config key name', async t => {
   }
 
   const fastify = Fastify()
-  await fastify.register(fastifyEnv, {
+  fastify.register(fastifyEnv, {
     schema: schema,
     confKey: 'customConfigKeyName'
   })
