@@ -6,7 +6,6 @@ const fastifyEnv = require('../index')
 
 function makeTest (t, options, isOk, confExpected, errorMessage) {
   t.plan(isOk ? 2 : 1)
-  options = Object.assign({ confKey: 'config' }, options)
 
   const fastify = Fastify()
   fastify.register(fastifyEnv, options)
@@ -258,4 +257,26 @@ tests.forEach(function (testConf) {
 
     makeTest(t, options, testConf.isOk, testConf.confExpected, testConf.errorMessage)
   })
+})
+
+t.test('should use custom config key name', async t => {
+  const schema = {
+    type: 'object',
+    required: [ 'PORT' ],
+    properties: {
+      PORT: {
+        type: 'integer',
+        default: 6666
+      }
+    }
+  }
+
+  const fastify = Fastify()
+  await fastify.register(fastifyEnv, {
+    schema: schema,
+    confKey: 'customConfigKeyName'
+  })
+    .ready(() => {
+      t.strictSame(fastify.customConfigKeyName, { PORT: 6666 })
+    })
 })
