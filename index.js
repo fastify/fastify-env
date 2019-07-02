@@ -6,7 +6,7 @@ const envSchema = require('env-schema')
 function loadAndValidateEnvironment (fastify, opts, done) {
   try {
     const config = envSchema(opts)
-    const confKey = opts.confKey
+    const confKey = opts.confKey || 'config'
     fastify.decorate(confKey, config)
     done()
   } catch (err) {
