@@ -104,7 +104,7 @@ const tests = [
     name: 'simple object - ok - required + default',
     schema: {
       type: 'object',
-      required: [ 'PORT' ],
+      required: ['PORT'],
       properties: {
         PORT: {
           type: 'integer',
@@ -122,7 +122,7 @@ const tests = [
     name: 'simple object - ok - allow array',
     schema: {
       type: 'object',
-      required: [ 'PORT' ],
+      required: ['PORT'],
       properties: {
         PORT: {
           type: 'integer',
@@ -140,7 +140,7 @@ const tests = [
     name: 'simple object - ok - merge multiple object + env',
     schema: {
       type: 'object',
-      required: [ 'PORT', 'MONGODB_URL' ],
+      required: ['PORT', 'MONGODB_URL'],
       properties: {
         PORT: {
           type: 'integer',
@@ -154,7 +154,7 @@ const tests = [
         }
       }
     },
-    data: [ { PORT: 3333 }, { MONGODB_URL: 'mongodb://localhost/pippo' } ],
+    data: [{ PORT: 3333 }, { MONGODB_URL: 'mongodb://localhost/pippo' }],
     isOk: true,
     confExpected: {
       PORT: 3333,
@@ -166,7 +166,7 @@ const tests = [
     name: 'simple object - ok - load only from env',
     schema: {
       type: 'object',
-      required: [ 'VALUE_FROM_ENV' ],
+      required: ['VALUE_FROM_ENV'],
       properties: {
         VALUE_FROM_ENV: {
           type: 'string'
@@ -183,7 +183,7 @@ const tests = [
     name: 'simple object - ok - opts override environment',
     schema: {
       type: 'object',
-      required: [ 'VALUE_FROM_ENV' ],
+      required: ['VALUE_FROM_ENV'],
       properties: {
         VALUE_FROM_ENV: {
           type: 'string'
@@ -200,7 +200,7 @@ const tests = [
     name: 'simple object - ok - load only from .env',
     schema: {
       type: 'object',
-      required: [ 'VALUE_FROM_DOTENV' ],
+      required: ['VALUE_FROM_DOTENV'],
       properties: {
         VALUE_FROM_DOTENV: {
           type: 'string'
@@ -218,7 +218,7 @@ const tests = [
     name: 'simple object - KO',
     schema: {
       type: 'object',
-      required: [ 'PORT' ],
+      required: ['PORT'],
       properties: {
         PORT: {
           type: 'integer'
@@ -233,7 +233,7 @@ const tests = [
     name: 'simple object - invalid data',
     schema: {
       type: 'object',
-      required: [ 'PORT' ],
+      required: ['PORT'],
       properties: {
         PORT: {
           type: 'integer'
@@ -263,7 +263,7 @@ t.test('should use custom config key name', t => {
   t.plan(1)
   const schema = {
     type: 'object',
-    required: [ 'PORT' ],
+    required: ['PORT'],
     properties: {
       PORT: {
         type: 'integer',
