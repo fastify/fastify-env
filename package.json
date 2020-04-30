@@ -34,10 +34,5 @@
     "snazzy": "^8.0.0",
     "standard": "^14.0.2",
     "tap": "^12.6.6"
-  },
-  "greenkeeper": {
-    "ignore": [
-      "tap"
-    ]
   }
 }
