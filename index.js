@@ -15,6 +15,6 @@ function loadAndValidateEnvironment (fastify, opts, done) {
 }
 
 module.exports = fp(loadAndValidateEnvironment, {
-  fastify: '>=0.39.0',
+  fastify: '>=3.x',
   name: 'fastify-env'
 })
