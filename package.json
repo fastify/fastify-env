@@ -28,7 +28,7 @@
     "fastify-plugin": "^2.0.0"
   },
   "devDependencies": {
-    "cross-env": "^5.2.0",
+    "cross-env": "^7.0.2",
     "fastify": "^3.0.0-rc.2",
     "pre-commit": "^1.2.2",
     "snazzy": "^8.0.0",
