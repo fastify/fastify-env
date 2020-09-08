@@ -53,7 +53,7 @@ const options = {
 // or, pass config options avalible on dotenv module
 const options = {
   dotenv: {
-    path: `${__dirname}/.env`
+    path: `${__dirname}/.env`,
     debug: true
   }
 }
