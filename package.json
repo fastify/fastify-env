@@ -6,9 +6,10 @@
   "scripts": {
     "lint": "standard | snazzy",
     "lint:fix": "standard --fix",
-    "unit": "cross-env VALUE_FROM_ENV=pippo tap test",
-    "test": "npm run lint && npm run unit",
-    "coverage": "cross-env VALUE_FROM_ENV=pippo tap --cov --coverage-report=html test"
+    "unit": "cross-env VALUE_FROM_ENV=pippo tap test/*.js",
+    "test": "npm run lint && npm run unit && npm run typescript",
+    "coverage": "cross-env VALUE_FROM_ENV=pippo tap --cov --coverage-report=html test/*.js",
+    "typescript": "tsd"
   },
   "repository": {
     "type": "git",
@@ -28,11 +29,16 @@
     "fastify-plugin": "^2.0.0"
   },
   "devDependencies": {
+    "@types/node": "^14.11.8",
     "cross-env": "^7.0.2",
     "fastify": "^3.0.0",
     "pre-commit": "^1.2.2",
     "snazzy": "^8.0.0",
     "standard": "^14.0.2",
-    "tap": "^14.10.7"
+    "tap": "^14.10.7",
+    "tsd": "^0.13.1"
+  },
+  "tsd": {
+    "directory": "test/types"
   }
 }
