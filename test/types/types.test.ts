@@ -23,5 +23,8 @@ app.register(fasitfyEnv, {
 app.register(fasitfyEnv, {
   dotenv: {},
 });
+app.register(fasitfyEnv, {
+  confKey: 'config'
+})
 
 app.ready();
