@@ -62,6 +62,19 @@ const options = {
 
 **NB:** internally this plugin force to not have additional properties, so the `additionalProperties` flag is forced to be `false`
 
+### Typescript
+In order to have typing for the fastify instance, you should follow the example below.
+
+```typescript
+declare module 'fastify' {
+  interface FastifyInstance {
+    config: { // this should be same as the confKey in options
+      // specify your typing here
+    };
+  }
+}
+```
+
 
 ## Acknowledgements
 
