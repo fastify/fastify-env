@@ -1,6 +1,7 @@
 'use strict'
 
 const t = require('tap')
+const path = require('path')
 const Fastify = require('fastify')
 const fastifyEnv = require('../index')
 
@@ -209,7 +210,7 @@ const tests = [
     },
     data: undefined,
     isOk: true,
-    dotenv: { path: `${__dirname}/.env` },
+    dotenv: { path: path.join(__dirname, '.env') },
     confExpected: {
       VALUE_FROM_DOTENV: 'look ma'
     }
