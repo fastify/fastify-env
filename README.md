@@ -1,6 +1,9 @@
 # fastify-env
-![CI workflow](https://github.com/fastify/fastify-env/workflows/CI%20workflow/badge.svg)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+![CI](https://github.com/fastify/fastify-env/workflows/CI/badge.svg)
+[![NPM version](https://img.shields.io/npm/v/fastify-env.svg?style=flat)](https://www.npmjs.com/package/fastify-env)
+[![Known Vulnerabilities](https://snyk.io/test/github/fastify/fastify-env/badge.svg)](https://snyk.io/test/github/fastify/fastify-env)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
 
 Fastify plugin to check environment variables
 
@@ -43,7 +46,8 @@ fastify
   })
 ```
 
-This module is a wrapper around [env-schema](https://www.npmjs.com/package/env-schema) so, to read `.env` file you must set the `dotenv` in options:
+This module is a wrapper around [env-schema](https://www.npmjs.com/package/env-schema).
+To read an `.env` file you must set `dotenv` in the options:
 
 ```js
 const options = {
@@ -60,10 +64,10 @@ const options = {
 
 ```
 
-**NB:** internally this plugin force to not have additional properties, so the `additionalProperties` flag is forced to be `false`
+**NB:** support for additional properties in the schema is disabled for this plugin, with the `additionalProperties` flag set to `false` internally.
 
 ### Typescript
-In order to have typing for the fastify instance, you should follow the example below.
+In order to have typing for the fastify instance, you should follow the example below:
 
 ```typescript
 declare module 'fastify' {
