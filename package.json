@@ -4,12 +4,12 @@
   "description": "Fastify plugin to check environment variables",
   "main": "index.js",
   "scripts": {
+    "coverage": "cross-env VALUE_FROM_ENV=pippo tap --cov --coverage-report=html test/*.js",
     "lint": "standard | snazzy",
     "lint:fix": "standard --fix",
-    "unit": "cross-env VALUE_FROM_ENV=pippo tap test/*.js",
     "test": "npm run lint && npm run unit && npm run typescript",
-    "coverage": "cross-env VALUE_FROM_ENV=pippo tap --cov --coverage-report=html test/*.js",
-    "typescript": "tsd"
+    "typescript": "tsd",
+    "unit": "cross-env VALUE_FROM_ENV=pippo tap test/*.js"
   },
   "repository": {
     "type": "git",
