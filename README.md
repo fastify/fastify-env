@@ -64,7 +64,7 @@ const options = {
 
 ```
 
-**NB:** support for additional properties in the schema is disabled for this plugin, with the `additionalProperties` flag set to `false` internally.
+**NB** Support for additional properties in the schema is disabled for this plugin, with the `additionalProperties` flag set to `false` internally.
 
 ### Typescript
 In order to have typing for the fastify instance, you should follow the example below:
