@@ -228,7 +228,7 @@ const tests = [
     },
     data: { },
     isOk: false,
-    errorMessage: 'must have required property \'PORT\''
+    errorMessage: 'env must have required property \'PORT\''
   },
   {
     name: 'simple object - invalid data',
@@ -243,7 +243,7 @@ const tests = [
     },
     data: [],
     isOk: false,
-    errorMessage: 'must NOT have fewer than 1 items,must be object,must match exactly one schema in oneOf'
+    errorMessage: 'opts/data must NOT have fewer than 1 items, opts/data must be object, opts/data must match exactly one schema in oneOf'
   }
 ]
 
