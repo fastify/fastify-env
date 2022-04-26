@@ -275,7 +275,7 @@ t.test('should use custom config key name', t => {
 
   const fastify = Fastify()
   fastify.register(fastifyEnv, {
-    schema: schema,
+    schema,
     confKey: 'customConfigKeyName'
   })
     .ready(() => {
