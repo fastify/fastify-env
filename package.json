@@ -1,6 +1,6 @@
 {
-  "name": "fastify-env",
-  "version": "2.1.1",
+  "name": "@fastify/env",
+  "version": "3.0.0",
   "description": "Fastify plugin to check environment variables",
   "main": "index.js",
   "scripts": {
@@ -40,5 +40,8 @@
   },
   "tsd": {
     "directory": "test/types"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
