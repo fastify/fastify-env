@@ -1,7 +1,7 @@
-# fastify-env
+# @fastify/env
 
 ![CI](https://github.com/fastify/fastify-env/workflows/CI/badge.svg)
-[![NPM version](https://img.shields.io/npm/v/fastify-env.svg?style=flat)](https://www.npmjs.com/package/fastify-env)
+[![NPM version](https://img.shields.io/npm/v/@fastify/env.svg?style=flat)](https://www.npmjs.com/package/@fastify/env)
 [![Known Vulnerabilities](https://snyk.io/test/github/fastify/fastify-env/badge.svg)](https://snyk.io/test/github/fastify/fastify-env)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
 
@@ -10,14 +10,14 @@ Fastify plugin to check environment variables
 ## Install
 
 ```
-npm install --save fastify-env
+npm install --save @fastify/env
 ```
 
 ## Usage
 
 ```js
 const fastify = require('fastify')()
-const fastifyEnv = require('fastify-env')
+const fastifyEnv = require('@fastify/env')
 
 const schema = {
   type: 'object',
