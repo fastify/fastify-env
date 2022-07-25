@@ -9,7 +9,7 @@ Fastify plugin to check environment variables
 ## Install
 
 ```
-npm install --save @fastify/env
+npm i @fastify/env
 ```
 
 ## Usage
