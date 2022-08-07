@@ -38,6 +38,10 @@
     "tap": "^16.0.0",
     "tsd": "^0.22.0"
   },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "tsd": {
     "directory": "test/types"
   },
