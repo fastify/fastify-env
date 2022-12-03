@@ -3,7 +3,7 @@
 const fp = require('fastify-plugin')
 const envSchema = require('env-schema')
 
-function loadAndValidateEnvironment (fastify, opts, done) {
+function fastifyEnv (fastify, opts, done) {
   try {
     const config = envSchema(opts)
     const confKey = opts.confKey || 'config'
@@ -14,7 +14,9 @@ function loadAndValidateEnvironment (fastify, opts, done) {
   }
 }
 
-module.exports = fp(loadAndValidateEnvironment, {
+module.exports = fp(fastifyEnv, {
   fastify: '4.x',
   name: '@fastify/env'
 })
+module.exports.default = fastifyEnv
+module.exports.fastifyEnv = fastifyEnv

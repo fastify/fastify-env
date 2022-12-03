@@ -1,7 +1,22 @@
-import { EnvSchemaOpt } from "env-schema";
-import { FastifyPluginCallback } from "fastify";
+import { EnvSchemaOpt } from "env-schema"
+import { FastifyPluginCallback } from "fastify"
 
-export type fastifyEnvOpt = EnvSchemaOpt & { confKey?: string };
+type FastifyEnv = FastifyPluginCallback<fastifyEnv.FastifyEnvOptions>
 
-export const fastifyEnv: FastifyPluginCallback<fastifyEnvOpt>;
-export default fastifyEnv;
+declare namespace fastifyEnv {
+  export interface FastifyEnvOptions extends EnvSchemaOpt {
+    confKey?: string
+  }
+
+  /**
+   * @deprecated Use FastifyEnvOptions instead
+   */
+  export type fastifyEnvOpt = FastifyEnvOptions
+
+  export const fastifyEnv: FastifyEnv
+  export { fastifyEnv as default }
+}
+
+declare function fastifyEnv(...params: Parameters<FastifyEnv>): ReturnType<FastifyEnv>
+export = fastifyEnv
+
