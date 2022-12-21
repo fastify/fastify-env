@@ -69,12 +69,14 @@ const options = {
 In order to have typing for the fastify instance, you should follow the example below:
 
 ```typescript
+import { FastifyInstance } from 'fastify';
+
 declare module 'fastify' {
-  interface FastifyInstance {
-    config: { // this should be same as the confKey in options
-      // specify your typing here
-    };
-  }
+    interface FastifyInstance extends FastifyInstance {
+        config: { // this should be same as the confKey in options
+            // specify your typing here
+        };
+    }
 }
 ```
 
