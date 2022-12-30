@@ -75,7 +75,7 @@ await fastify.register(fastifyEnv)
 OR
 ```js
 fastify.register(fastifyEnv)
-await fastify.after()
+await fastify
 // fastify.config can be used in here
 ```
 **NB** Support for additional properties in the schema is disabled for this plugin, with the `additionalProperties` flag set to `false` internally.
