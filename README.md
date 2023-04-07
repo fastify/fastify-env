@@ -62,7 +62,22 @@ const options = {
 }
 
 ```
+### Using @fastify/env to configure other plugins
+The `@fastify/env` plugin loads asynchronously. If you wish to use its values in a different plugin before the boot sequence, you need to make sure that:
+1. `@fastify/env` is registered first.
+2. Await the plugin registration or await after()
 
+```js
+await fastify.register(fastifyEnv)
+// fastify.config can be used in here
+```
+
+OR
+```js
+fastify.register(fastifyEnv)
+await fastify
+// fastify.config can be used in here
+```
 **NB** Support for additional properties in the schema is disabled for this plugin, with the `additionalProperties` flag set to `false` internally.
 
 ### Typescript
