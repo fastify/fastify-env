@@ -1,7 +1,7 @@
 'use strict'
 
 const t = require('tap')
-const path = require('path')
+const path = require('node:path')
 const Fastify = require('fastify')
 const fastifyEnv = require('../index')
 
