@@ -41,8 +41,17 @@ fastify
     if (err) console.error(err)
 
     console.log(fastify.config) // or fastify[options.confKey]
+    console.log(fastify.getEnvs())
     // output: { PORT: 3000 }
   })
+```
+
+You can also use the function `getEnvs()` of the Request from within a handler function: 
+```js
+fastify.get('/', (request, reply) => {
+    console.log(request.getEnvs())
+    // output: { PORT: 3000 }
+})
 ```
 
 This module is a wrapper around [env-schema](https://www.npmjs.com/package/env-schema).
@@ -53,7 +62,7 @@ const options = {
   dotenv: true // will read .env in root folder
 }
 
-// or, pass config options avalible on dotenv module
+// or, pass config options available on dotenv module
 const options = {
   dotenv: {
     path: `${__dirname}/.env`,
@@ -81,18 +90,43 @@ await fastify
 **NB** Support for additional properties in the schema is disabled for this plugin, with the `additionalProperties` flag set to `false` internally.
 
 ### Typescript
-In order to have typing for the fastify instance, you should follow the example below:
+In order to have typing for the fastify instance, you should either:
+
+- use the `declaration merging` technique to enhance the `FastifyInstance` type with the property and its keys you have defined in the options:
 
 ```typescript
 declare module 'fastify' {
   interface FastifyInstance {
     config: { // this should be same as the confKey in options
       // specify your typing here
+      FOO: string
     };
   }
 }
+
+const fastify = Fastify()
+fastify.register(fastifyEnv)
+
+fastify.config.FOO // will be a string
+fastify.config.BAR // error: Property BAR does not exist on type { FOO: string }
 ```
 
+- use the generic function `getEnvs()` to get the already typed object:
+
+```typescript
+type Envs = {
+  FOO: string
+}
+
+const fastify = Fastify()
+await fastify.register(fastifyEnv)
+
+const envs = fastify.getEnvs<Envs>() // envs will be of type Envs
+
+envs.FOO // will be a string
+envs.BAR // error: Property BAR does not exist on type Envs
+```
+If this is the case it is suggested to use [json-schema-to-ts ](https://github.com/ThomasAribart/json-schema-to-ts) to have the type always synchronized with the actual schema. 
 
 ## Acknowledgements
 
