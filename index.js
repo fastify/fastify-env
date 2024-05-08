@@ -9,8 +9,12 @@ function fastifyEnv (fastify, opts, done) {
     const confKey = opts.confKey || 'config'
     fastify.decorate(confKey, config)
 
-    fastify.decorate('getEnvs', () => { return config })
-    fastify.decorateRequest('getEnvs', () => { return config })
+    if (!fastify.hasDecorator('getEnvs')) {
+      fastify.decorate('getEnvs', () => { return config })
+    }
+    if (!fastify.hasRequestDecorator('getEnvs')) {
+      fastify.decorateRequest('getEnvs', () => { return config })
+    }
 
     done()
   } catch (err) {
