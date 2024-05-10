@@ -53,6 +53,7 @@ fastify.get('/', (request, reply) => {
     // output: { PORT: 3000 }
 })
 ```
+Note that the `getEnvs` decorators will not be added if they already exist.
 
 This module is a wrapper around [env-schema](https://www.npmjs.com/package/env-schema).
 To read an `.env` file you must set `dotenv` in the options:
