@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/fastify/fastify-env#readme",
   "dependencies": {
-    "env-schema": "^5.0.0",
+    "env-schema": "^6.0.0",
     "fastify-plugin": "^4.0.0"
   },
   "devDependencies": {
