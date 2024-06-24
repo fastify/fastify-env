@@ -282,3 +282,66 @@ t.test('should use custom config key name', t => {
       t.strictSame(fastify.customConfigKeyName, { PORT: 6666 })
     })
 })
+
+t.test('should use function `getEnvs` to retrieve the envs object', async t => {
+  t.plan(2)
+
+  const schema = {
+    type: 'object',
+    properties: {
+      PORT: { type: 'integer', default: 6666 }
+    }
+  }
+
+  const fastify = Fastify()
+
+  let requestEnvs
+  fastify.get('/', (request) => {
+    requestEnvs = request.getEnvs()
+    return 'ok'
+  })
+
+  await fastify.register(fastifyEnv, {
+    schema
+  })
+
+  await fastify.inject({
+    method: 'GET',
+    url: '/'
+  })
+
+  t.strictSame(requestEnvs, { PORT: 6666 })
+  t.strictSame(fastify.getEnvs(), { PORT: 6666 })
+})
+t.test('should skip the getEnvs decorators if there is already one with the same name', async t => {
+  t.plan(2)
+
+  const schema = {
+    type: 'object',
+    properties: {
+      PORT: { type: 'integer', default: 6666 }
+    }
+  }
+
+  const fastify = Fastify()
+  fastify.decorate('getEnvs', () => { return 'another_value' })
+  fastify.decorateRequest('getEnvs', () => { return 'another_value' })
+
+  let requestEnvs
+  fastify.get('/', (request) => {
+    requestEnvs = request.getEnvs()
+    return 'ok'
+  })
+
+  await fastify.register(fastifyEnv, {
+    schema
+  })
+
+  await fastify.inject({
+    method: 'GET',
+    url: '/'
+  })
+
+  t.strictSame(requestEnvs, 'another_value')
+  t.strictSame(fastify.getEnvs(), 'another_value')
+})

@@ -8,6 +8,14 @@ function fastifyEnv (fastify, opts, done) {
     const config = envSchema(opts)
     const confKey = opts.confKey || 'config'
     fastify.decorate(confKey, config)
+
+    if (!fastify.hasDecorator('getEnvs')) {
+      fastify.decorate('getEnvs', () => { return config })
+    }
+    if (!fastify.hasRequestDecorator('getEnvs')) {
+      fastify.decorateRequest('getEnvs', () => { return config })
+    }
+
     done()
   } catch (err) {
     done(err)
