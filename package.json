@@ -1,6 +1,6 @@
 {
   "name": "@fastify/env",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "Fastify plugin to check environment variables",
   "main": "index.js",
   "type": "commonjs",
@@ -38,7 +38,7 @@
     "snazzy": "^9.0.0",
     "standard": "^17.1.0",
     "tap": "^18.7.1",
-    "tsd": "^0.30.7"
+    "tsd": "^0.31.0"
   },
   "pre-commit": [
     "lint",

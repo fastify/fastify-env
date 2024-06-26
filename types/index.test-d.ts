@@ -1,4 +1,4 @@
-import Fastify from 'fastify'
+import Fastify, {FastifyInstance, FastifyRequest} from 'fastify'
 import { expectDeprecated, expectType } from 'tsd'
 import fastifyEnv, { FastifyEnvOptions, fastifyEnvOpt } from '..'
 
@@ -32,3 +32,11 @@ fastify.register(fastifyEnv, {
 
 expectDeprecated({} as fastifyEnvOpt)
 expectType<FastifyEnvOptions>({} as fastifyEnvOpt)
+
+type Envs = {
+  FOO: string
+}
+declare const instance: FastifyInstance
+expectType<Envs>(instance.getEnvs<Envs>())
+declare const request: FastifyRequest
+expectType<Envs>(request.getEnvs<Envs>())

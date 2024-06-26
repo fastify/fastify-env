@@ -1,6 +1,18 @@
 import { EnvSchemaOpt } from "env-schema"
 import { FastifyPluginCallback } from "fastify"
 
+declare module 'fastify' {
+  export interface FastifyInstance {
+    // Returns the environment variables object.
+    getEnvs<const E>(): E,
+  }
+
+  export interface FastifyRequest {
+    // Returns the environment variables object.
+    getEnvs<const E>(): E,
+  }
+}
+
 type FastifyEnv = FastifyPluginCallback<fastifyEnv.FastifyEnvOptions>
 
 declare namespace fastifyEnv {
