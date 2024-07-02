@@ -6,7 +6,7 @@
   "type": "commonjs",
   "types": "types/index.d.ts",
   "scripts": {
-    "coverage": "cross-env VALUE_FROM_ENV=pippo tap --cov --coverage-report=html",
+    "coverage": "cross-env VALUE_FROM_ENV=pippo tap --coverage-report=html",
     "lint": "standard | snazzy",
     "lint:fix": "standard --fix",
     "test": "npm run test:unit && npm run test:typescript",
@@ -28,16 +28,16 @@
   "homepage": "https://github.com/fastify/fastify-env#readme",
   "dependencies": {
     "env-schema": "^6.0.0",
-    "fastify-plugin": "^4.0.0"
+    "fastify-plugin": "^5.0.0-pre.fv5.1"
   },
   "devDependencies": {
-    "@fastify/pre-commit": "^2.0.2",
-    "@types/node": "^20.1.0",
-    "cross-env": "^7.0.2",
-    "fastify": "^4.0.0-rc.2",
+    "@fastify/pre-commit": "^2.1.0",
+    "@types/node": "^20.11.30",
+    "cross-env": "^7.0.3",
+    "fastify": "^5.0.0-alpha.2",
     "snazzy": "^9.0.0",
-    "standard": "^17.0.0",
-    "tap": "^16.0.0",
+    "standard": "^17.1.0",
+    "tap": "^20.0.1",
     "tsd": "^0.31.0"
   },
   "pre-commit": [
