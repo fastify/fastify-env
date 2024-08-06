@@ -23,7 +23,7 @@ function fastifyEnv (fastify, opts, done) {
 }
 
 module.exports = fp(fastifyEnv, {
-  fastify: '4.x',
+  fastify: '5.x',
   name: '@fastify/env'
 })
 module.exports.default = fastifyEnv
