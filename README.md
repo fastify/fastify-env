@@ -131,6 +131,7 @@ If this is the case it is suggested to use [json-schema-to-ts ](https://github.c
 
 ### Handling `.env` Files in TypeScript Projects
 
+
 To ensure that the `.env` file is copied to the `dist/` directory after TypeScript compilation, you can add a post-build step to your `package.json` scripts:
 
 ```json
@@ -139,8 +140,10 @@ To ensure that the `.env` file is copied to the `dist/` directory after TypeScri
   "start": "node dist/app.js"
 }
 ```
-
 This script will compile your TypeScript code and copy the `.env` file to the `dist/` directory.
+
+Warning: This step may not be needed for all projects. When you point to a specific path for your .env file, make sure it’s included in the build output and verify that it’s in the correct location. In TypeScript projects, paths like __dirname and import.meta.dirname can differ between development and production. Adjust according to your project’s needs to avoid confusion.
+
 
 ## Acknowledgements
 
