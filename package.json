@@ -1,6 +1,6 @@
 {
   "name": "@fastify/env",
-  "version": "5.0.0-pre.fv5.2",
+  "version": "5.0.0",
   "description": "Fastify plugin to check environment variables",
   "main": "index.js",
   "type": "commonjs",
@@ -28,13 +28,13 @@
   "homepage": "https://github.com/fastify/fastify-env#readme",
   "dependencies": {
     "env-schema": "^6.0.0",
-    "fastify-plugin": "^5.0.0-pre.fv5.1"
+    "fastify-plugin": "^5.0.0"
   },
   "devDependencies": {
     "@fastify/pre-commit": "^2.1.0",
     "@types/node": "^22.0.0",
     "cross-env": "^7.0.3",
-    "fastify": "^5.0.0-alpha.3",
+    "fastify": "^5.0.0-alpha.4",
     "snazzy": "^9.0.0",
     "standard": "^17.1.0",
     "tap": "^20.0.1",
