@@ -1,24 +1,23 @@
 'use strict'
 
-const t = require('tap')
+const t = require('node:test')
 const path = require('node:path')
 const Fastify = require('fastify')
 const fastifyEnv = require('../index')
 
 function makeTest (t, options, isOk, confExpected, errorMessage) {
-  t.plan(isOk ? 2 : 1)
+  // t.plan(isOk ? 2 : 1)
 
   const fastify = Fastify()
   fastify.register(fastifyEnv, options)
-    .ready(err => {
-      if (isOk) {
-        t.notOk(err)
-        t.strictSame(fastify.config, confExpected)
-        return
-      }
-
-      t.strictSame(err.message, errorMessage)
-    })
+      .ready(err => {
+        if (isOk) {
+          t.assert.equal(err, null)
+          t.assert.deepEqual(fastify.config, confExpected)
+          return
+        }
+        t.assert.equal(err.message, errorMessage)
+      })
 }
 
 const tests = [
@@ -261,7 +260,7 @@ tests.forEach(function (testConf) {
 })
 
 t.test('should use custom config key name', t => {
-  t.plan(1)
+  // t.plan(1)
   const schema = {
     type: 'object',
     required: ['PORT'],
@@ -279,12 +278,12 @@ t.test('should use custom config key name', t => {
     confKey: 'customConfigKeyName'
   })
     .ready(() => {
-      t.strictSame(fastify.customConfigKeyName, { PORT: 6666 })
+      t.assert.deepEqual(fastify.customConfigKeyName, { PORT: 6666 })
     })
 })
 
 t.test('should use function `getEnvs` to retrieve the envs object', async t => {
-  t.plan(2)
+  // t.plan(2)
 
   const schema = {
     type: 'object',
@@ -310,11 +309,11 @@ t.test('should use function `getEnvs` to retrieve the envs object', async t => {
     url: '/'
   })
 
-  t.strictSame(requestEnvs, { PORT: 6666 })
-  t.strictSame(fastify.getEnvs(), { PORT: 6666 })
+  t.assert.deepEqual(requestEnvs, { PORT: 6666 })
+  t.assert.deepEqual(fastify.getEnvs(), { PORT: 6666 })
 })
 t.test('should skip the getEnvs decorators if there is already one with the same name', async t => {
-  t.plan(2)
+  // t.plan(2)
 
   const schema = {
     type: 'object',
@@ -342,6 +341,6 @@ t.test('should skip the getEnvs decorators if there is already one with the same
     url: '/'
   })
 
-  t.strictSame(requestEnvs, 'another_value')
-  t.strictSame(fastify.getEnvs(), 'another_value')
+  t.assert.equal(requestEnvs, 'another_value')
+  t.assert.equal(fastify.getEnvs(), 'another_value')
 })
