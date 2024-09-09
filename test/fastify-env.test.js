@@ -10,14 +10,14 @@ function makeTest (t, options, isOk, confExpected, errorMessage) {
 
   const fastify = Fastify()
   fastify.register(fastifyEnv, options)
-      .ready(err => {
-        if (isOk) {
-          t.assert.equal(err, null)
-          t.assert.deepEqual(fastify.config, confExpected)
-          return
-        }
-        t.assert.equal(err.message, errorMessage)
-      })
+    .ready(err => {
+      if (isOk) {
+        t.assert.equal(err, null)
+        t.assert.deepEqual(fastify.config, confExpected)
+        return
+      }
+      t.assert.equal(err.message, errorMessage)
+    })
 }
 
 const tests = [
