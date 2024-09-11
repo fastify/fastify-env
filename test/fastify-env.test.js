@@ -1,24 +1,27 @@
 'use strict'
 
-const t = require('tap')
+const t = require('node:test')
 const path = require('node:path')
 const Fastify = require('fastify')
 const fastifyEnv = require('../index')
 
-function makeTest (t, options, isOk, confExpected, errorMessage) {
+async function makeTest (t, options, isOk, confExpected, errorMessage) {
   t.plan(isOk ? 2 : 1)
 
   const fastify = Fastify()
-  fastify.register(fastifyEnv, options)
-    .ready(err => {
-      if (isOk) {
-        t.notOk(err)
-        t.strictSame(fastify.config, confExpected)
-        return
-      }
+  try {
+    await fastify.register(fastifyEnv, options)
+    await fastify.ready()
 
-      t.strictSame(err.message, errorMessage)
-    })
+    if (isOk) {
+      t.assert.ifError(null)
+      t.assert.deepStrictEqual(fastify.config, confExpected)
+    }
+  } catch (err) {
+    if (!isOk) {
+      t.assert.deepStrictEqual(err.message, errorMessage)
+    }
+  }
 }
 
 const tests = [
@@ -248,7 +251,7 @@ const tests = [
 ]
 
 tests.forEach(function (testConf) {
-  t.test(testConf.name, t => {
+  t.test(testConf.name, async t => {
     const options = {
       schema: testConf.schema,
       data: testConf.data,
@@ -256,11 +259,11 @@ tests.forEach(function (testConf) {
       dotenvConfig: testConf.dotenvConfig
     }
 
-    makeTest(t, options, testConf.isOk, testConf.confExpected, testConf.errorMessage)
+    await makeTest(t, options, testConf.isOk, testConf.confExpected, testConf.errorMessage)
   })
 })
 
-t.test('should use custom config key name', t => {
+t.test('should use custom config key name', async (t) => {
   t.plan(1)
   const schema = {
     type: 'object',
@@ -274,13 +277,12 @@ t.test('should use custom config key name', t => {
   }
 
   const fastify = Fastify()
-  fastify.register(fastifyEnv, {
+  await fastify.register(fastifyEnv, {
     schema,
     confKey: 'customConfigKeyName'
   })
-    .ready(() => {
-      t.strictSame(fastify.customConfigKeyName, { PORT: 6666 })
-    })
+  await fastify.ready()
+  t.assert.deepStrictEqual(fastify.customConfigKeyName, { PORT: 6666 })
 })
 
 t.test('should use function `getEnvs` to retrieve the envs object', async t => {
@@ -310,8 +312,8 @@ t.test('should use function `getEnvs` to retrieve the envs object', async t => {
     url: '/'
   })
 
-  t.strictSame(requestEnvs, { PORT: 6666 })
-  t.strictSame(fastify.getEnvs(), { PORT: 6666 })
+  t.assert.deepStrictEqual(requestEnvs, { PORT: 6666 })
+  t.assert.deepStrictEqual(fastify.getEnvs(), { PORT: 6666 })
 })
 t.test('should skip the getEnvs decorators if there is already one with the same name', async t => {
   t.plan(2)
@@ -342,6 +344,6 @@ t.test('should skip the getEnvs decorators if there is already one with the same
     url: '/'
   })
 
-  t.strictSame(requestEnvs, 'another_value')
-  t.strictSame(fastify.getEnvs(), 'another_value')
+  t.assert.deepStrictEqual(requestEnvs, 'another_value')
+  t.assert.deepStrictEqual(fastify.getEnvs(), 'another_value')
 })

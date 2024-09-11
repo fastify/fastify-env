@@ -6,12 +6,12 @@
   "type": "commonjs",
   "types": "types/index.d.ts",
   "scripts": {
-    "coverage": "cross-env VALUE_FROM_ENV=pippo tap --coverage-report=html",
+    "coverage": "cross-env VALUE_FROM_ENV=pippo c8 --reporter=html node --test",
     "lint": "standard | snazzy",
     "lint:fix": "standard --fix",
     "test": "npm run test:unit && npm run test:typescript",
     "test:typescript": "tsd",
-    "test:unit": "cross-env VALUE_FROM_ENV=pippo tap"
+    "test:unit": "c8 --100 cross-env VALUE_FROM_ENV=pippo node --test"
   },
   "repository": {
     "type": "git",
@@ -37,7 +37,7 @@
     "fastify": "^5.0.0-alpha.4",
     "snazzy": "^9.0.0",
     "standard": "^17.1.0",
-    "tap": "^20.0.1",
+    "c8": "^10.1.2",
     "tsd": "^0.31.0"
   },
   "pre-commit": [
