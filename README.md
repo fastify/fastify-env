@@ -46,7 +46,7 @@ fastify
   })
 ```
 
-You can also use the function `getEnvs()` of the Request from within a handler function: 
+You can also use the function `getEnvs()` of the Request from within a handler function:
 ```js
 fastify.get('/', (request, reply) => {
     console.log(request.getEnvs())
@@ -127,7 +127,7 @@ const envs = fastify.getEnvs<Envs>() // envs will be of type Envs
 envs.FOO // will be a string
 envs.BAR // error: Property BAR does not exist on type Envs
 ```
-If this is the case it is suggested to use [json-schema-to-ts ](https://github.com/ThomasAribart/json-schema-to-ts) to have the type always synchronized with the actual schema. 
+If this is the case it is suggested to use [json-schema-to-ts ](https://github.com/ThomasAribart/json-schema-to-ts) to have the type always synchronized with the actual schema.
 
 ## Acknowledgements
 
