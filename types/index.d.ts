@@ -1,5 +1,5 @@
-import { EnvSchemaOpt } from "env-schema"
-import { FastifyPluginCallback } from "fastify"
+import { EnvSchemaOpt } from 'env-schema'
+import { FastifyPluginCallback } from 'fastify'
 
 declare module 'fastify' {
   export interface FastifyInstance {
@@ -29,6 +29,5 @@ declare namespace fastifyEnv {
   export { fastifyEnv as default }
 }
 
-declare function fastifyEnv(...params: Parameters<FastifyEnv>): ReturnType<FastifyEnv>
+declare function fastifyEnv (...params: Parameters<FastifyEnv>): ReturnType<FastifyEnv>
 export = fastifyEnv
-
