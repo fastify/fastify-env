@@ -1,4 +1,4 @@
-import Fastify, {FastifyInstance, FastifyRequest} from 'fastify'
+import Fastify, { FastifyInstance, FastifyRequest } from 'fastify'
 import { expectDeprecated, expectType } from 'tsd'
 import fastifyEnv, { FastifyEnvOptions, fastifyEnvOpt } from '..'
 
