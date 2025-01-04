@@ -150,4 +150,4 @@ Kindly sponsored by [Mia Platform](https://www.mia-platform.eu/).
 
 ## License
 
-Licensed under [MIT](./LICENSE)
+Licensed under [MIT](./LICENSE).
