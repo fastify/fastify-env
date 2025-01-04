@@ -12,6 +12,21 @@ Fastify plugin to check environment variables
 npm i @fastify/env
 ```
 
+### Compatibility
+
+| Plugin version | Fastify version |
+| ---------------|-----------------|
+| `^5.x`         | `^5.x`          |
+| `^4.x`         | `^4.x`          |
+| `^2.x`         | `^3.x`          |
+| `^0.x`         | `^2.x`          |
+| `^0.x`         | `^1.x`          |
+
+
+Please note that if a Fastify version is out of support, then so are the corresponding versions of this plugin
+in the table above.
+See [Fastify's LTS policy](https://github.com/fastify/fastify/blob/main/docs/Reference/LTS.md) for more details.
+
 ## Usage
 
 ```js
@@ -56,7 +71,7 @@ fastify.get('/', (request, reply) => {
 Note that the `getEnvs` decorators will not be added if they already exist.
 
 This module is a wrapper around [env-schema](https://www.npmjs.com/package/env-schema).
-To read an `.env` file you must set `dotenv` in the options:
+To read a `.env` file you must set `dotenv` in the options:
 
 ```js
 const options = {
@@ -91,14 +106,14 @@ await fastify
 **NB** Support for additional properties in the schema is disabled for this plugin, with the `additionalProperties` flag set to `false` internally.
 
 ### Typescript
-In order to have typing for the fastify instance, you should either:
+To have typings for the fastify instance, you should either:
 
 - use the `declaration merging` technique to enhance the `FastifyInstance` type with the property and its keys you have defined in the options:
 
 ```typescript
 declare module 'fastify' {
   interface FastifyInstance {
-    config: { // this should be same as the confKey in options
+    config: { // this should be the same as the confKey in options
       // specify your typing here
       FOO: string
     };
@@ -127,8 +142,12 @@ const envs = fastify.getEnvs<Envs>() // envs will be of type Envs
 envs.FOO // will be a string
 envs.BAR // error: Property BAR does not exist on type Envs
 ```
-If this is the case it is suggested to use [json-schema-to-ts ](https://github.com/ThomasAribart/json-schema-to-ts) to have the type always synchronized with the actual schema.
+If this is the case it is suggested to use [json-schema-to-ts](https://github.com/ThomasAribart/json-schema-to-ts) to have the type always synchronized with the actual schema.
 
-## Acknowledgements
+## Acknowledgments
 
-Kindly sponsored by [Mia Platform](https://www.mia-platform.eu/)
+Kindly sponsored by [Mia Platform](https://www.mia-platform.eu/).
+
+## License
+
+Licensed under [MIT](./LICENSE)
