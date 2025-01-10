@@ -10,10 +10,10 @@ function fastifyEnv (fastify, opts, done) {
     fastify.decorate(confKey, config)
 
     if (!fastify.hasDecorator('getEnvs')) {
-      fastify.decorate('getEnvs', () => { return config })
+      fastify.decorate('getEnvs', () => config)
     }
     if (!fastify.hasRequestDecorator('getEnvs')) {
-      fastify.decorateRequest('getEnvs', () => { return config })
+      fastify.decorateRequest('getEnvs', () => config)
     }
 
     done()
