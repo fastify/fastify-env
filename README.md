@@ -16,11 +16,11 @@ npm i @fastify/env
 
 | Plugin version | Fastify version |
 | ---------------|-----------------|
-| `^5.x`         | `^5.x`          |
+| `>=5.x`        | `^5.x`          |
 | `^4.x`         | `^4.x`          |
-| `^2.x`         | `^3.x`          |
-| `^0.x`         | `^2.x`          |
-| `^0.x`         | `^1.x`          |
+| `>=2.x <4.x`   | `^3.x`          |
+| `>=0.x 2.x`    | `^2.x`          |
+| `>=0.x 2.x`    | `^1.x`          |
 
 
 Please note that if a Fastify version is out of support, then so are the corresponding versions of this plugin
