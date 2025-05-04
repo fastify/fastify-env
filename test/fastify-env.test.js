@@ -250,7 +250,7 @@ const tests = [
   }
 ]
 
-tests.forEach(function (testConf) {
+for (const testConf of tests) {
   t.test(testConf.name, async t => {
     const options = {
       schema: testConf.schema,
@@ -261,7 +261,7 @@ tests.forEach(function (testConf) {
 
     await makeTest(t, options, testConf.isOk, testConf.confExpected, testConf.errorMessage)
   })
-})
+}
 
 t.test('should use custom config key name', async (t) => {
   t.plan(1)
