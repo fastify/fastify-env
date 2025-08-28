@@ -5,6 +5,12 @@
   "main": "index.js",
   "type": "commonjs",
   "types": "types/index.d.ts",
+  "files": [
+    "index.js",
+    "types/index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "coverage": "cross-env VALUE_FROM_ENV=pippo c8 --reporter=html node --test",
     "lint": "eslint",
