@@ -60,7 +60,6 @@
     "fastify-plugin": "^5.0.0"
   },
   "devDependencies": {
-    "@fastify/pre-commit": "^2.1.0",
     "@types/node": "^24.0.8",
     "c8": "^10.1.2",
     "cross-env": "^10.0.0",
@@ -69,10 +68,6 @@
     "neostandard": "^0.12.0",
     "tsd": "^0.33.0"
   },
-  "pre-commit": [
-    "lint",
-    "test"
-  ],
   "tsd": {
     "directory": "test/types"
   },
