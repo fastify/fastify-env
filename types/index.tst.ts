@@ -1,6 +1,6 @@
 import Fastify, { FastifyInstance, FastifyRequest } from 'fastify'
-import { expectDeprecated, expectType } from 'tsd'
-import fastifyEnv, { FastifyEnvOptions, fastifyEnvOpt } from '..'
+import { expect } from 'tstyche'
+import fastifyEnv, { FastifyEnvOptions } from '..'
 
 const fastify = Fastify()
 
@@ -30,13 +30,12 @@ fastify.register(fastifyEnv, {
   confKey: 'config'
 })
 
-expectDeprecated({} as fastifyEnvOpt)
-expectType<FastifyEnvOptions>({} as fastifyEnvOpt)
+expect({}).type.toBeAssignableTo<FastifyEnvOptions>()
 
 type Envs = {
   FOO: string
 }
 declare const instance: FastifyInstance
-expectType<Envs>(instance.getEnvs<Envs>())
+expect(instance.getEnvs<Envs>()).type.toBe<Envs>()
 declare const request: FastifyRequest
-expectType<Envs>(request.getEnvs<Envs>())
+expect(request.getEnvs<Envs>()).type.toBe<Envs>()
