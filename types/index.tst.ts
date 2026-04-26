@@ -30,7 +30,7 @@ fastify.register(fastifyEnv, {
   confKey: 'config'
 })
 
-expect({}).type.toBeAssignableTo<FastifyEnvOptions>()
+expect<FastifyEnvOptions>().type.toBeAssignableFrom({})
 
 type Envs = {
   FOO: string
