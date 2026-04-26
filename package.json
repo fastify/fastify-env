@@ -68,11 +68,6 @@
     "neostandard": "^0.13.0",
     "tstyche": "^7.0.0"
   },
-  "tstyche": {
-    "testFileMatch": [
-      "types/*.tst.ts"
-    ]
-  },
   "publishConfig": {
     "access": "public"
   }
