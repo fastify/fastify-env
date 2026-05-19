@@ -20,11 +20,6 @@ declare namespace fastifyEnv {
     confKey?: string
   }
 
-  /**
-   * @deprecated Use FastifyEnvOptions instead
-   */
-  export type fastifyEnvOpt = FastifyEnvOptions
-
   export const fastifyEnv: FastifyEnv
   export { fastifyEnv as default }
 }
