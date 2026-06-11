@@ -1,6 +1,6 @@
 {
   "name": "@fastify/env",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "description": "Fastify plugin to check environment variables",
   "main": "index.js",
   "type": "commonjs",
