@@ -146,7 +146,7 @@ If this is the case it is suggested to use [json-schema-to-ts](https://github.co
 
 ## Acknowledgments
 
-Kindly sponsored by [Mia Platform](https://www.mia-platform.eu/).
+Kindly sponsored by [Mia Platform](https://mia-platform.eu).
 
 ## License
 
