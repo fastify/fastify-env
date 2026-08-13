@@ -78,11 +78,11 @@ const options = {
   dotenv: true // will read .env in root folder
 }
 
-// or, pass config options available on dotenv module
+// or, pass config options supported by env-schema
 const options = {
   dotenv: {
     path: `${__dirname}/.env`,
-    debug: true
+    encoding: 'utf8'
   }
 }
 
