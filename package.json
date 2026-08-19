@@ -56,7 +56,7 @@
     }
   ],
   "dependencies": {
-    "env-schema": "^7.0.0",
+    "env-schema": "^8.0.0",
     "fastify-plugin": "^6.0.0"
   },
   "devDependencies": {
