@@ -22,7 +22,6 @@ npm i @fastify/env
 | `>=0.x 2.x`    | `^2.x`          |
 | `>=0.x 2.x`    | `^1.x`          |
 
-
 Please note that if a Fastify version is out of support, then so are the corresponding versions of this plugin
 in the table above.
 See [Fastify's LTS policy](https://github.com/fastify/fastify/blob/main/docs/Reference/LTS.md) for more details.
@@ -62,12 +61,14 @@ fastify
 ```
 
 You can also use the function `getEnvs()` of the Request from within a handler function:
+
 ```js
 fastify.get('/', (request, reply) => {
     console.log(request.getEnvs())
     // output: { PORT: 3000 }
 })
 ```
+
 Note that the `getEnvs` decorators will not be added if they already exist.
 
 This module is a wrapper around [env-schema](https://www.npmjs.com/package/env-schema).
@@ -87,8 +88,64 @@ const options = {
 }
 
 ```
+
+### Formats and custom Ajv options
+
+`@fastify/env` validates the schema with its **own Ajv instance** (provided by [env-schema](https://www.npmjs.com/package/env-schema)), independent from the one Fastify uses for routes.
+Formats or options configured on the Fastify instance (`Fastify({ ajv: ... })`), or coming from a type provider such as TypeBox, are **not** applied to the env schema, so using the `format` keyword results in:
+
+```
+unknown format "uuid" ignored in schema at path "#/properties/ID"
+```
+
+Register the formats on the plugin's Ajv instance with the `ajv.customOptions` option, which can be an Ajv options object or a function that receives the Ajv instance and returns it.
+For the standard formats you can use [ajv-formats](https://www.npmjs.com/package/ajv-formats) (`npm i ajv-formats`, it is not a dependency of this plugin):
+
+```js
+await fastify.register(fastifyEnv, {
+  schema: {
+    type: 'object',
+    required: ['ID'],
+    properties: {
+      ID: { type: 'string', format: 'uuid' }
+    }
+  },
+  ajv: {
+    customOptions (ajvInstance) {
+      require('ajv-formats')(ajvInstance)
+      // or: ajvInstance.addFormat('myFormat', (value) => /* ... */)
+      return ajvInstance
+    }
+  }
+})
+```
+
+With TypeBox (1.x, i.e. `@fastify/type-provider-typebox` >= 6) you can reuse the formats built into TypeBox:
+
+```ts
+import { Format, Type } from '@fastify/type-provider-typebox'
+
+await fastify.register(fastifyEnv, {
+  schema: Type.Object({
+    ID: Type.String({ format: 'uuid' })
+  }),
+  ajv: {
+    customOptions (ajvInstance) {
+      for (const entry of Format.Entries()) {
+        ajvInstance.addFormat(...entry)
+      }
+      return ajvInstance
+    }
+  }
+})
+```
+
+See the [env-schema documentation](https://github.com/fastify/env-schema#readme) for all the supported Ajv options.
+
 ### Using @fastify/env to configure other plugins
+
 The `@fastify/env` plugin loads asynchronously. If you wish to use its values in a different plugin before the boot sequence, you need to make sure that:
+
 1. `@fastify/env` is registered first.
 2. Await the plugin registration or await after()
 
@@ -98,14 +155,17 @@ await fastify.register(fastifyEnv)
 ```
 
 OR
+
 ```js
 fastify.register(fastifyEnv)
 await fastify
 // fastify.config can be used in here
 ```
+
 **NB** Support for additional properties in the schema is disabled for this plugin, with the `additionalProperties` flag set to `false` internally.
 
 ### Typescript
+
 To have typings for the fastify instance, you should either:
 
 - use the `declaration merging` technique to enhance the `FastifyInstance` type with the property and its keys you have defined in the options:
@@ -142,6 +202,7 @@ const envs = fastify.getEnvs<Envs>() // envs will be of type Envs
 envs.FOO // will be a string
 envs.BAR // error: Property BAR does not exist on type Envs
 ```
+
 If this is the case it is suggested to use [json-schema-to-ts](https://github.com/ThomasAribart/json-schema-to-ts) to have the type always synchronized with the actual schema.
 
 ## Acknowledgments
