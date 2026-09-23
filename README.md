@@ -134,6 +134,8 @@ await fastify.register(fastifyEnv, {
       for (const entry of Format.Entries()) {
         ajvInstance.addFormat(...entry)
       }
+      // Or if you only want to register a specific format:
+      // ajvInstance.addFormat('uuid', Format.Get('uuid'))
       return ajvInstance
     }
   }
